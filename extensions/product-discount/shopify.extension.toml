@@ -1,7 +1,7 @@
 api_version = "2023-10"
 
 [[extensions]]
-handle = "product-discount-js"
+handle = "product-discount"
 name = "t:name"
 description = "t:description"
 type = "function"

@@ -1,3 +1,28 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
+name = "discounts-app"
+client_id = "798d3608dcb16ea20b6818a0dc7d9671"
+application_url = "https://rankings-courses-certainly-pakistan.trycloudflare.com"
+embedded = true
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
 scopes = "write_products,write_discounts"
+
+[auth]
+redirect_urls = [
+  "https://rankings-courses-certainly-pakistan.trycloudflare.com/auth/callback",
+  "https://rankings-courses-certainly-pakistan.trycloudflare.com/auth/shopify/callback",
+  "https://rankings-courses-certainly-pakistan.trycloudflare.com/api/auth/callback",
+  "https://rankings-courses-certainly-pakistan.trycloudflare.com/.shopify/graphiql/auth/callback"
+]
+
+[webhooks]
+api_version = "2023-10"
+
+[pos]
+embedded = false
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "blaze-web-agency.myshopify.com"

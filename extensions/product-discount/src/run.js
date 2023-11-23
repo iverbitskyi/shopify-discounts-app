@@ -21,12 +21,13 @@ const EMPTY_DISCOUNT = {
  * @returns {FunctionRunResult}
  */
 export function run(input) {
+  // Define a type for your configuration, and parse it from the metafield
   /**
    * @type {{
-  *   quantity: number
-  *   percentage: number
-  * }}
-  */
+   *   quantity: number
+   *   percentage: number
+   * }}
+   */
   const configuration = JSON.parse(
     input?.discountNode?.metafield?.value ?? "{}"
   );
@@ -35,14 +36,18 @@ export function run(input) {
   }
 
   const targets = input.cart.lines
-    .filter(line => line.quantity >= configuration.quantity &&
-      line.merchandise.__typename == "ProductVariant")
-    .map(line => {
+    // Use the configured quantity instead of a hardcoded value
+    .filter(
+      (line) =>
+        line.quantity >= configuration.quantity &&
+        line.merchandise.__typename == "ProductVariant"
+    )
+    .map((line) => {
       const variant = /** @type {ProductVariant} */ (line.merchandise);
       return /** @type {Target} */ ({
         productVariant: {
-          id: variant.id
-        }
+          id: variant.id,
+        },
       });
     });
 
@@ -57,11 +62,12 @@ export function run(input) {
         targets,
         value: {
           percentage: {
-            value: configuration.percentage.toString()
-          }
-        }
-      }
+            // Use the configured percentage instead of a hardcoded value
+            value: configuration.percentage.toString(),
+          },
+        },
+      },
     ],
-    discountApplicationStrategy: DiscountApplicationStrategy.First
+    discountApplicationStrategy: DiscountApplicationStrategy.First,
   };
-};
+}
